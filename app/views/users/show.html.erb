@@ -1,0 +1,40 @@
+<!-- app/views/users/show.html.erb -->
+
+<h1><%= @user.username %></h1>
+
+<ul class="photo-list">
+
+</ul>
+
+<%= render 'photos/form' %>
+
+<script>
+  var addPhotoToPage = function (photo) {
+    var imgTag = '<img src="' + photo.get("url") + '">'
+    var listTag = "<li>" + imgTag + "<br>" + photo.get("title") + "</li>";
+    $(".photo-list").append(listTag);
+  }
+
+  var populatePhotoList = function () {
+    var photos = [];
+
+    PhotoTagger.Photo.fetchByUserId("<%= @user.id %>", function (photos) {
+      photos.forEach(function (photo) { addPhotoToPage(photo); })
+    });
+  };
+
+  $(document).ready(function () {
+    $('#new-photo-form').on("submit", function (event) {
+      event.preventDefault();
+      PhotoTagger.Photo.create({
+        title: $("#photo-title").val(),
+        url: $("#photo-url").val(),
+        owner_id: "<%= current_user.id %>"
+      }, function (photo) {
+        addPhotoToPage(photo);
+      })
+    });
+
+    populatePhotoList();
+  });
+</script>

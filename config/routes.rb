@@ -1,9 +1,9 @@
 PhotoTagger::Application.routes.draw do
-  resources :users, only: [:new, :create, :destroy, :index]
+  resources :users, except: [:edit, :update]
   resource :session, only: [:new, :create, :destroy]
 
   namespace "api", defaults: { format: :json } do
-    resources :photos, only: [:create]
+    resources :photos, only: [:create, :update]
 
     resources :users, only: [] do
       get 'photos', on: :member

@@ -10,6 +10,17 @@ class PhotosController < ApplicationController
     end
   end
 
+  def update
+    @photo = Photo.find(params[:id])
+
+    if @photo.update_attributes(params[:photo])
+      render json: @photo
+    else
+      render json: @photo.errors, status: 422
+    end
+  end
+
+
   def photo_taggings
     @photo = Photo.find(params[:id]).includes(:taggings)
 

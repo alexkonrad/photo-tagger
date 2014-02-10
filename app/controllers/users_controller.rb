@@ -16,14 +16,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def photos
-    @user = User.find(params[:id]).includes(:owned_photos)
-
-    if @user
-      render json: @user.owned_photos
-    else
-      render json: @user.errors, status: 422
-    end
+  def show
+    @user = User.find(params[:id])
   end
 
   def destroy
