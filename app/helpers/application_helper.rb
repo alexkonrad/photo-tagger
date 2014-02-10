@@ -30,4 +30,10 @@ module ApplicationHelper
   def logged_in?
     !!current_user
   end
+
+  def must_own_to_tag!(photo_id)
+    photo = Photo.find(photo_id)
+
+    current_user == photo.owner
+  end
 end

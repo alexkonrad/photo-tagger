@@ -1,13 +1,14 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: photo_taggings
 #
-#  id              :integer          not null, primary key
-#  username        :string(255)      not null
-#  password_digest :string(255)      not null
-#  session_token   :string(255)      not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  photo_id   :integer          not null
+#  x_pos      :integer          not null
+#  y_pos      :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

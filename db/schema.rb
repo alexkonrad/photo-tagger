@@ -11,7 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210151135) do
+ActiveRecord::Schema.define(:version => 20140210161630) do
+
+  create_table "photo_taggings", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "photo_id",   :null => false
+    t.integer  "x_pos",      :null => false
+    t.integer  "y_pos",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "photo_taggings", ["photo_id"], :name => "index_photo_taggings_on_photo_id"
+  add_index "photo_taggings", ["user_id", "photo_id"], :name => "index_photo_taggings_on_user_id_and_photo_id", :unique => true
+  add_index "photo_taggings", ["user_id"], :name => "index_photo_taggings_on_user_id"
+
+  create_table "photos", :force => true do |t|
+    t.integer  "owner_id",   :null => false
+    t.string   "url",        :null => false
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "photos", ["owner_id"], :name => "index_photos_on_owner_id"
 
   create_table "users", :force => true do |t|
     t.string   "username",        :null => false
