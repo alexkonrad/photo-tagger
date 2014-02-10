@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PhotoTagger</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <p>
+    Params: <%= params %>
+  </p>
+
+  <p>
+    Session: <%= session %>
+  </p>
+
+  <p>
+    Flash: <%= flash %>
+  </p>
+
+  <p>
+    <% if logged_in? %>
+      Currently logged in as <%= link_to "#{current_user.username}", user_url(current_user) %>
+      <%= button_to "Sign Out", session_url, method: :delete %>
+    <% end %>
+  </p>
+
+<%= yield %>
+
+</body>
+</html>
