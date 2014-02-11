@@ -37,8 +37,8 @@
             photoObjects.push( new Photo(photos[i]) );
           };
 
-          photoObjects = Photo.all.concat(photoObjects);
 
+          Photo.all = Photo.all.concat(photoObjects);
           callback(photoObjects);
         }
       });
@@ -60,16 +60,16 @@
 
       if (that.get("id")) {
         $.ajax({
-          url: "<%= api_photo_path(params[:id]) %>",
+          url: "/api/photos/" + that.get("id"),
           type: "PUT",
           data: that.attributes,
           success: function () { callback(that); }
         })
       } else {
         $.ajax({
-          url: "<%= api_photos_path %>",
+          url: "/api/photos",
           type: "POST",
-          data: that.attributes,
+          data: { photo: that.attributes },
           success: function (photo) {
             _.extend(that.attributes, photo);
             Photo.all.push(that);

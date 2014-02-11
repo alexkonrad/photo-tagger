@@ -26,6 +26,8 @@ group :development do
   gem 'annotate'
 end
 
+gem 'ejs'
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password

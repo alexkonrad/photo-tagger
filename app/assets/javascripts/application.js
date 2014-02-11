@@ -15,4 +15,24 @@
 //= require_tree .
 
 //= require_tree ./models
+//= require_tree ./views
+//= require_tree ../templates
+
+(function (root) {
+  var PhotoTagger = root.PhotoTagger = (root.PhotoTagger || {});
+
+  var init = PhotoTagger.initialize = function (user_id) {
+    var photosListView = new PhotoTagger.PhotosListView ();
+
+    PhotoTagger.Photo.fetchByUserId(user_id, function () {
+      var str = photosListView.render().$el;
+      $("#content").append(str);
+    });
+
+    var photosFormView = new PhotoTagger.PhotoFormView();
+    var renderedForm = photosFormView.render()
+
+    $("#content").append(renderedForm.$el);
+  }
+})(this);
 
